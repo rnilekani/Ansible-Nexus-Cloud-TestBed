@@ -1,0 +1,19 @@
+---
+
+- name: Testing Port Channel Module
+  hosts: nexus3k1
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Ensuring PortChannel 10 doesnt exist on the switch
+      nxos_portchannel: group=10 host={{ inventory_hostname }}
+
+    - name: Ensuring Port Channel 10 is created and adding members + setting mode to on
+      nxos_portchannel: 
+         group: 10
+         members: ['Ethernet1/3', 'Ethernet1/4']
+         mode: 'active'
+         host: "{{ inventory_hostname }}"
+         state: present

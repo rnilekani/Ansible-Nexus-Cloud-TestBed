@@ -1,0 +1,22 @@
+---
+
+- name: Testing Interface Module on Nexus 3k
+  hosts: leaf
+
+
+  tasks:
+
+
+    - name: default interfaces
+      nxos_interface: interface={{ item }} state=default host={{ inventory_hostname }}
+      with_items:
+        - Ethernet1/2
+        - Ethernet1/3
+
+    # Ensure an Interface is a layer 3 port and that it has proper description
+    - name: config_interface
+      nxos_interface: interface=Ethernet1/2 description='Ansible Testing' mode=layer3 host={{ inventory_hostname }}
+      
+    # Admin down an interface
+    
+    - nxos_interface: interface=Ethernet1/2 admin_state=down host={{ inventory_hostname }}

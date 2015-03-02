@@ -1,0 +1,20 @@
+---
+
+- name: Testing VRF module on Nexus 3k
+  hosts: nexus3k1
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Globally configuring a VRF
+      nxos_vrf: vrf=cloud host={{ inventory_hostname }}
+
+    - name: Configuring an interface with an IP address.
+      nxos_ipv4_interface: interface=Ethernet1/2 ip_addr=1.1.1.1 mask=24 state=present host={{ inventory_hostname }}
+
+    - name: Applying the VRF to the interface. 
+      nxos_vrf_interface: vrf=cloud interface=Ethernet1/2 state=present host={{ inventory_hostname }}
+
+    - name: Saving running config to startup-config
+      nxos_save_config: host={{ inventory_hostname }}

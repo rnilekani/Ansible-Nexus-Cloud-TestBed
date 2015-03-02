@@ -1,0 +1,14 @@
+---
+
+- name: Testing HSRP module on Nexus 3k
+  hosts: nexus3k1
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+   - name: Creating an Interface for a vlan so that HSRP can be added to interface
+     nxos_interface: state=present host={{ inventory_hostname }} interface=vlan91
+
+   - name: Ensuring HSRP is configured with following params on a SVI
+     nxos_hsrp: group=10 vip=100.1.1.1 priority=150 interface=vlan91 preempt=enabled host={{ inventory_hostname }}

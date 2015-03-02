@@ -1,0 +1,10 @@
+---
+- name: Gathering Facts Module
+  hosts: nexus3k1
+  
+# retrieve facts
+  tasks:
+    - nxos_get_facts: host={{ inventory_hostname }}
+
+# retrieve facts with detailed info for interfaces (from 'show interface status')
+    - nxos_get_facts: host={{ inventory_hostname }} detail=true

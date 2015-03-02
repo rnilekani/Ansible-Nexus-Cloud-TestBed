@@ -1,0 +1,19 @@
+---
+
+- name: Testing VLAN module on Nexus 3k
+  hosts: nexus3k1
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: Adding VLANs on testing devices
+      nxos_vlan: vlan_id="91-95" state=present host={{ inventory_hostname }}
+
+    - name: config VLAN names for a few VLANs
+      nxos_vlan: vlan_id={{ item.vid }} name={{ item.name }} host={{ inventory_hostname}} state=present
+      with_items:
+         - { vid: 91, name: web }
+         - { vid: 92, name: app }
+         - { vid: 93, name: db }
+         - { vid: 94, name: dmz }
+         - { vid: 95, name: staging }

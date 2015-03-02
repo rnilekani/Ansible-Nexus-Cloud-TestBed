@@ -1,0 +1,11 @@
+---
+- name: Testing how to add access-list using command module
+  hosts: nexus3k1
+  gather_facts: yes
+  connection: local
+
+  tasks:
+
+    - name: adding an access-list
+      nxos_command: type=config command='ip access-list ANSIBLE-ACL, 10 permit ip 1.1.1.1/32 any' host={{ inventory_hostname }}
+

@@ -1,0 +1,11 @@
+---
+
+- name: Testing VRF module on Nexus 3k
+  hosts: nexus3k1
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Test ICMP connectivity by pinging nexus3k2 from nexus3k1
+      nxos_ping: dest=10.127.49.72 host={{ inventory_hostname }}
