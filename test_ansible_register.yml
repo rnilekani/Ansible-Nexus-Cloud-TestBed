@@ -1,0 +1,16 @@
+---
+- name: Testing the usage of Register module in Ansible
+  hosts: nexus3k1
+  gather_facts: no
+  connection: local
+
+  tasks:
+    - name: Using register command to capture the description output
+      nxos_command: command='show interface Ethernet 1/2' host={{ inventory_hostname }} type=show
+      register: description
+      ignore_errors: yes
+
+    - name: Enabling the interface using Ansible if manual from previous result
+      when: description|success
+      nxos_interface: interface=Ethernet1/2 description="Manual to Ansible" host={{ inventory_hostname }} admin_state=down
+      
