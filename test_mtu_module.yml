@@ -1,0 +1,13 @@
+---
+- name: Testing MTU module on Nexus 3k
+  hosts: nexus3k1
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Ensuring system mtu is 9126
+      nxos_mtu: sysmtu=9216 state=present host={{ inventory_hostname }}
+
+    - name: Ensuring interface mtu is 1600
+      nxos_mtu: interface=Ethernet1/2 mtu=1600 host={{ inventory_hostname }}  
