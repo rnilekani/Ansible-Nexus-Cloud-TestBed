@@ -1,0 +1,60 @@
+---
+# Theory of tags
+# tags allow us to run all of a playbook or part of it.
+#
+# assume: ansible-playbook tags.yml --tags foo
+#
+# try this with:
+# --tags foo
+# --tags bar
+# --tags extra
+#
+# the value of a 'tags:' element can be a string or list
+# of tag names. Variables are not usable in tag names.
+
+- name: Testing Ansible Assert module.
+  hosts: nexus3k1
+  gather_facts: false
+
+
+  # any tags applied to the play are shorthand to applying
+  # the tag to all tasks in it. Here, each task is given
+  # the tag extra
+
+  tags: 
+    - universal
+
+  tasks:
+    - debug: var=show_vlan_brief
+      tags:
+        - vlans
+        - trunks
+
+    - name: Using the show vlan command
+      raw: "show vlan brief | grep active"
+      register: show_vlan_brief
+      ignore_errors: yes
+      tags: vlans
+
+    - debug: var=show_vlan_brief 
+      tags: data 
+
+    - name: Testing the existence of those vlans using assert module
+      assert: 
+        that:
+          - "'{{ item }}' in show_vlan_brief.stdout"
+      with_items:
+          - 91
+          - 92
+          - 93
+          - 94
+          - 95
+          - 96
+          - 109
+      ignore_errors: yes
+      tags: 
+        - unit_test
+
+
+# this task will run if you don't specify any tags,
+# if you specify 'foo' or if you specify 'extra'        
