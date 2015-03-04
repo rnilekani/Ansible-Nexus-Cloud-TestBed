@@ -1,0 +1,30 @@
+---
+- name: Testing Ansible Assert module.
+  hosts: nexus3k1
+  gather_facts: false
+
+  tasks:
+    - debug: var=show_vlan_brief
+      tags:
+        - vlans
+        - trunks
+
+    - name: Using the show vlan command
+      raw: "show vlan brief | grep active"
+      register: show_vlan_brief
+      ignore_errors: yes
+      tags: vlans
+
+    - name: Testing the existence of those vlans using assert module
+      assert: 
+        that:
+          - "'{{ item }}' in show_vlan_brief.stdout"
+      with_items:
+          - 91
+          - 92
+          - 93
+          - 94
+          - 95
+          - 96
+          - 109
+      ignore_errors: yes
