@@ -15,6 +15,8 @@
       ignore_errors: yes
       tags: vlans
 
+    - debug: var=show_vlan_brief  
+
     - name: Testing the existence of those vlans using assert module
       assert: 
         that:
