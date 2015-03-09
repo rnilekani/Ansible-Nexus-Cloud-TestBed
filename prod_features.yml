@@ -1,0 +1,155 @@
+---
+- name: Task for enabling features on Nexus 3172 top of rack switches
+  hosts: nexus3k1
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+
+    - name: Enabling features on Nexus 3172 TOR switches.
+      nxos_feature: feature={{ item }} state=enabled host={{ inventory_hostname }}
+      register:  
+      with_items:
+         - lacp
+         - interface-vlan
+         - lldp
+         - ntp
+         - scp-server
+         - ssh
+         - tacacs
+         - telnet
+         - vpc
+         - ospf
+         - ospfv3
+         - bgp 
+      ignore_errors: yes
+      tags: features
+
+
+    - name: Changing the admin state of all the interfaces to up.
+      nxos_interface: interface={{ item }} description='Configured by Ansible Controller' state=present mode=layer2 host={{ inventory_hostname }} admin_state=up
+      with_items:
+         - Ethernet1/1
+         - Ethernet1/2
+         - Ethernet1/3
+         - Ethernet1/4
+         - Ethernet1/5
+         - Ethernet1/6
+         - Ethernet1/7
+         - Ethernet1/8
+         - Ethernet1/9
+         - Ethernet1/10
+         - Ethernet1/11
+         - Ethernet1/12
+         - Ethernet1/13
+         - Ethernet1/14
+         - Ethernet1/15
+         - Ethernet1/16
+         - Ethernet1/17
+         - Ethernet1/18
+         - Ethernet1/19
+         - Ethernet1/20
+         - Ethernet1/21
+         - Ethernet1/22
+         - Ethernet1/23
+         - Ethernet1/24
+         - Ethernet1/25
+         - Ethernet1/26
+         - Ethernet1/27
+         - Ethernet1/28
+         - Ethernet1/29
+         - Ethernet1/30
+         - Ethernet1/31
+         - Ethernet1/32
+         - Ethernet1/33
+         - Ethernet1/34
+         - Ethernet1/35
+         - Ethernet1/36
+         - Ethernet1/37
+         - Ethernet1/38
+         - Ethernet1/39
+         - Ethernet1/40
+         - Ethernet1/41
+         - Ethernet1/42
+         - Ethernet1/43
+         - Ethernet1/44
+         - Ethernet1/45
+         - Ethernet1/46
+         - Ethernet1/47
+         - Ethernet1/48
+
+
+    - name: Configuring the trunk interfaces on odd ports
+      nxos_command: command="interface {{item.name}},switchport mode trunk,spanning-tree port type edge trunk,channel-group {{item.port_number}} mode passive" type=config host={{ inventory_hostname }}
+      with_items:
+           - {name: Ethernet1/1, port_number: 1}
+           - {name: Ethernet1/3, port_number: 3}
+           - {name: Ethernet1/5, port_number: 5}
+           - {name: Ethernet1/7, port_number: 7}
+           - {name: Ethernet1/9, port_number: 9}
+           - {name: Ethernet1/11, port_number: 11}
+           - {name: Ethernet1/13, port_number: 13}
+           - {name: Ethernet1/15, port_number: 15}
+           - {name: Ethernet1/17, port_number: 17}
+           - {name: Ethernet1/19, port_number: 19}
+           - {name: Ethernet1/21, port_number: 21}
+           - {name: Ethernet1/23, port_number: 23}
+           - {name: Ethernet1/25, port_number: 25}
+           - {name: Ethernet1/27, port_number: 27}
+           - {name: Ethernet1/29, port_number: 29}
+           - {name: Ethernet1/31, port_number: 31}
+           - {name: Ethernet1/33, port_number: 33}
+           - {name: Ethernet1/35, port_number: 35}
+           - {name: Ethernet1/37, port_number: 37}
+           - {name: Ethernet1/39, port_number: 39}
+           - {name: Ethernet1/41, port_number: 41}
+           - {name: Ethernet1/43, port_number: 43}
+           - {name: Ethernet1/45, port_number: 45}
+           - {name: Ethernet1/47, port_number: 47}
+      tags: test
+      ignore_errors: yes
+
+
+    - name: Configuring the even numbered interfaces to access mode.
+      nxos_command: command='interface {{item.name}},switchport access vlan 90,spanning-tree port type edge,spanning-tree bpduguard enable,channel-group {{item.port_number}} mode passive' type=config host={{ inventory_hostname }}
+      with_items:
+           - {name: Ethernet1/2, port_number: 2}
+           - {name: Ethernet1/4, port_number: 4}
+           - {name: Ethernet1/6, port_number: 6}
+           - {name: Ethernet1/8, port_number: 8}
+           - {name: Ethernet1/10, port_number: 10}
+           - {name: Ethernet1/12, port_number: 12}
+           - {name: Ethernet1/14, port_number: 14}
+           - {name: Ethernet1/16, port_number: 16}
+           - {name: Ethernet1/18, port_number: 18}
+           - {name: Ethernet1/20, port_number: 20}
+           - {name: Ethernet1/22, port_number: 22}
+           - {name: Ethernet1/24, port_number: 24}
+           - {name: Ethernet1/26, port_number: 26}
+           - {name: Ethernet1/28, port_number: 28}
+           - {name: Ethernet1/30, port_number: 30}
+           - {name: Ethernet1/32, port_number: 32}
+           - {name: Ethernet1/34, port_number: 34}
+           - {name: Ethernet1/36, port_number: 36}
+           - {name: Ethernet1/38, port_number: 38}
+           - {name: Ethernet1/40, port_number: 40}
+           - {name: Ethernet1/42, port_number: 42}
+           - {name: Ethernet1/44, port_number: 44}
+           - {name: Ethernet1/46, port_number: 46}
+           - {name: Ethernet1/48, port_number: 48}
+      tags: test
+      ignore_errors: yes
+
+
+
+
+
+
+
+
+
+
+
+
+
