@@ -1,0 +1,30 @@
+---
+- name: Pushing SNMP Configuration to Nexus 3k using NX-API
+  hosts: nexus3k1
+  connection: local
+  gather_facts: yes
+
+
+  vars:
+    snmp_data:
+      - user: test
+        auth: md5
+        pass: password
+        community: public
+        ips: 1.1.1.1
+
+  tasks:
+    - name: Creating the SNMP user account on the device.
+      nxos_command: type=config command='snmp-server user {{item.user}} auth {{item.auth}} {{item.pass}} priv {{item.pass}}' host={{ inventory_hostname }}
+      with_items: snmp_data
+      ignore_errors: yes
+
+    - name: Adding the SNMP server configuration used for polling and trapping
+      nxos_command: type=config command='snmp-server host {{item.ips}} traps version 2c {{item.community}}' host={{ inventory_hostname }}
+      with_items: snmp_data
+      ignore_errors: yes
+
+    - name: Adding the SNMP community string
+      nxos_command: type=config command='snmp-server community {{item.community}} group network-operator' host={{ inventory_hostname }}
+      with_items: snmp_data
+      ignore_errors: yes
