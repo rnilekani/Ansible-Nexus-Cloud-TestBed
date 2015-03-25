@@ -1,0 +1,24 @@
+---
+
+- name: Pushing VPC Global Configuration
+  hosts: nexus3k1
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    - name: Making sure that vpc domain does not exist on switch
+      nxos_vpc: domain=76 host={{ inventory_hostname }} state=absent
+
+    - name:  Once confirmed Make sure vpc domain 76 is configured
+      nxos_vpc: domain=76 role_priority=1 pkl_src=192.168.0.1 pkl_dest=192.168.0.2 host={{ inventory_hostname }}
+
+    - name: Ensure peer gateway and auto recovery is enabled for vpc domain 76
+      nxos_vpc: domain=76 peer_gw=true auto_recovery=true host={{ inventory_hostname }}
+
+#    vpc domain 76
+#        peer-switch
+#        role priority 1
+#        peer-keepalive destination 192.168.0.2 source 192.168.0.1
+#        peer-gateway
+#        auto-recovery
