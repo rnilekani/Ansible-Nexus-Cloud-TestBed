@@ -1,9 +1,7 @@
-# Ansible-Nexus-Cloud-TestBed
-
 ---
-layout: page
-fb_comments: 3
-title: About
+layout: post
+title: Nexus 7000 FAQ
+tags: nexus, cisco
 ---
 
 <img src="https://cloud.githubusercontent.com/assets/6173303/7695904/2fccf91e-fdbc-11e4-8c0f-0cf54a962255.jpg" width="256" height="370" align="right">
