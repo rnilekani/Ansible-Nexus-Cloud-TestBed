@@ -6,7 +6,7 @@ fb_comments: 3
 title: About
 ---
 
-<img src="hhttps://www.facebook.com/photo.php?fbid=10155372671510167&set=a.10150275764785167.486333.528720166&type=1&theater" width="256" height="170" align="right">
+<img src="https://www.facebook.com/photo.php?fbid=10155372671510167&set=a.10150275764785167.486333.528720166&type=1&theater" width="256" height="170" align="right">
 
 My name is Ron Nilekani. I'm a Network Programmer living in San Antonio with a passion for art and technology
 
