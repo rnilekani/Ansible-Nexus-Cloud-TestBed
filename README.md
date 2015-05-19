@@ -6,7 +6,7 @@ fb_comments: 3
 title: About
 ---
 
-<img src="https://www.facebook.com/photo.php?fbid=10155372671510167&set=a.10150275764785167.486333.528720166&type=1&theater" width="256" height="170" align="right">
+<img src="https://cloud.githubusercontent.com/assets/6173303/7695904/2fccf91e-fdbc-11e4-8c0f-0cf54a962255.jpg" width="256" height="170" align="right">
 
 My name is Ron Nilekani. I'm a Network Programmer living in San Antonio with a passion for art and technology
 
@@ -30,5 +30,5 @@ You can find me on a variety of world wild interweb sites where my username is u
 - [Flickr](http://www.flickr.com/photos/rsms/) — photography
 - [Facebook](http://www.facebook.com/raunaqnilekani) — friends and foes
 
-### [<img src="/res/twitter.png" width="29" height="20" style="display:inline-block;vertical-align:middle"> @rsms](http://twitter.com/rsms)
+### [<img src="/res/twitter.png" width="29" height="20" style="display:inline-block;vertical-align:middle"> @rnilekani](http://twitter.com/rsms)
 
