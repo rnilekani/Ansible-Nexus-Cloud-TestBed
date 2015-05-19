@@ -6,7 +6,7 @@ fb_comments: 3
 title: About
 ---
 
-<img src="https://cloud.githubusercontent.com/assets/6173303/7695904/2fccf91e-fdbc-11e4-8c0f-0cf54a962255.jpg" width="256" height="170" align="right">
+<img src="https://cloud.githubusercontent.com/assets/6173303/7695904/2fccf91e-fdbc-11e4-8c0f-0cf54a962255.jpg" width="256" height="370" align="right">
 
 My name is Ron Nilekani. I'm a Network Programmer living in San Antonio with a passion for art and technology
 
